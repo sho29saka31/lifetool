@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Life-Tool - あなただけのパーソナルOS体験">
+    <title>Life-Tool - Personal OS Hub</title>
+    
+    <!-- Core Styles -->
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --hover-color: #f5f5f5;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --border-color: #333333;
+            --hover-color: #2a2a2a;
+            --shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Header will be injected here */
+        #header-container {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Quick Access Grid */
+        .quick-access {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+            border-color: var(--primary-color);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .feature-badge {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            margin-top: 0.5rem;
+        }
+        
+        /* Status Banner */
+        .status-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status-info {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+        }
+        
+        /* Footer will be injected here */
+        #footer-container {
+            margin-top: 4rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .status-banner {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .status-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (Injected by header.js) -->
+    <div id="header-container"></div>
+    
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Life-Tool</h1>
+            <p>あなただけのパーソナルOS体験。500以上の機能で、あなたの生活をスマートに。</p>
+        </section>
+        
+        <!-- Status Banner -->
+        <div class="status-banner">
+            <div class="status-info">
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <span id="auth-status">ログイン状態: 未ログイン</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot" style="background: #f59e0b;"></div>
+                    <span id="sync-status">同期: オフライン</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot" style="background: #3b82f6;"></div>
+                    <span id="storage-status">ストレージ: 初期化中...</span>
+                </div>
+            </div>
+            <div>
+                <button id="setup-btn" style="background: white; color: #667eea; border: none; padding: 0.5rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    セットアップ
+                </button>
+            </div>
+        </div>
+        
+        <!-- Quick Access -->
+        <section class="quick-access">
+            <h2 class="section-title">クイックアクセス</h2>
+            <div class="features-grid" id="quick-access-grid">
+                <!-- Popular features will be loaded here -->
+            </div>
+        </section>
+        
+        <!-- Categories -->
+        <section class="categories">
+            <h2 class="section-title">カテゴリー別機能</h2>
+            <div class="features-grid" id="categories-grid">
+                <!-- Categories will be loaded here -->
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer (Injected by footer.js) -->
+    <div id="footer-container"></div>
+    
+    <!-- Router Styles -->
+    <link rel="stylesheet" href="common/router-styles.css">
+    
+    <!-- Core Scripts -->
+    <script src="core/storage.js"></script>
+    <script src="core/api-manager.js"></script>
+    <script src="core/auth.js"></script>
+    <script src="core/router.js"></script>
+    <script src="common/header.js"></script>
+    <script src="common/footer.js"></script>
+    
+    <!-- Main Script -->
+    <script>
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Life-Tool initializing...');
+            
+            // Initialize storage
+            try {
+                await LifeToolStorage.init();
+                console.log('Storage initialized');
+            } catch (error) {
+                console.error('Storage init failed:', error);
+            }
+            
+            // Router will handle page rendering
+            // No need to manually load content here
+        });
+    </script>
+</body>
+</html>
